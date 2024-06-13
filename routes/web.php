@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\Frontend\HomepageController::class, 'index']);
+Route::get('/about', [\App\Http\Controllers\Frontend\AboutController::class, 'index']);
+Route::get('/property', [\App\Http\Controllers\Frontend\PropertyController::class, 'index']);
+Route::get('/property/{slug}', [\App\Http\Controllers\Frontend\PropertyController::class, 'show']);
+Route::get('/contact', [\App\Http\Controllers\Frontend\ContactController::class, 'index']);
 
 Auth::routes();
 
@@ -29,3 +31,4 @@ Route::group(['middleware' => 'isAdmin','prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 });
+ 
